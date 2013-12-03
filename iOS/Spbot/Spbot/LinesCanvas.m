@@ -44,17 +44,19 @@
     CGContextAddLineToPoint(contextRef, _point2.x, _point2.y);
     CGContextStrokePath(contextRef);
     
-    [[UIColor colorWithRed:149/255.0 green:27/255.0 blue:39/255.0 alpha:1] setStroke];
-	CGContextBeginPath(contextRef);
-    CGContextMoveToPoint(contextRef, _point1.x, _point1.y);
-    CGContextAddLineToPoint(contextRef, _point.x, _point.y);
-    CGContextStrokePath(contextRef);
-    
-    [[UIColor colorWithRed:9/255.0 green:95/255.0 blue:15/255.0 alpha:1] setStroke];
-	CGContextBeginPath(contextRef);
-    CGContextMoveToPoint(contextRef, _point2.x, _point2.y);
-    CGContextAddLineToPoint(contextRef, _point.x, _point.y);
-    CGContextStrokePath(contextRef);
+    if (_point.x > 0 && _point.y > 0) {
+        [[UIColor colorWithRed:149/255.0 green:27/255.0 blue:39/255.0 alpha:1] setStroke];
+        CGContextBeginPath(contextRef);
+        CGContextMoveToPoint(contextRef, _point1.x, _point1.y);
+        CGContextAddLineToPoint(contextRef, _point.x, _point.y);
+        CGContextStrokePath(contextRef);
+        
+        [[UIColor colorWithRed:9/255.0 green:95/255.0 blue:15/255.0 alpha:1] setStroke];
+        CGContextBeginPath(contextRef);
+        CGContextMoveToPoint(contextRef, _point2.x, _point2.y);
+        CGContextAddLineToPoint(contextRef, _point.x, _point.y);
+        CGContextStrokePath(contextRef);
+    }
 }
 
 @end

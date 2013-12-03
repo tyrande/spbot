@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67AB1EB603A54EEEA29DDA9D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F2822914F8415BAAEAB9E4 /* libPods.a */; };
 		7EFB55E21849DA8000BF6C46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFB55E11849DA8000BF6C46 /* Foundation.framework */; };
 		7EFB55E41849DA8000BF6C46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFB55E31849DA8000BF6C46 /* CoreGraphics.framework */; };
 		7EFB55E61849DA8000BF6C46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFB55E51849DA8000BF6C46 /* UIKit.framework */; };
@@ -24,7 +25,7 @@
 		7EFB56101849DA8000BF6C46 /* SpbotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB560F1849DA8000BF6C46 /* SpbotTests.m */; };
 		7EFB561B1849DCB900BF6C46 /* FixPinCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB561A1849DCB900BF6C46 /* FixPinCircle.m */; };
 		7EFB561E1849F6BA00BF6C46 /* LinesCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB561D1849F6BA00BF6C46 /* LinesCanvas.m */; };
-		E6AAD5CE184C82BE009AC43C /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5CD184C82BE009AC43C /* opencv2.framework */; };
+		E61B1830184D918D00AE4EBA /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E61B182F184D918D00AE4EBA /* opencv2.framework */; };
 		E6AAD5D0184C82E8009AC43C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5CF184C82E8009AC43C /* QuartzCore.framework */; };
 		E6AAD5D2184C82F1009AC43C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5D1184C82F1009AC43C /* CoreVideo.framework */; };
 		E6AAD5D4184C82FA009AC43C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5D3184C82FA009AC43C /* CoreMedia.framework */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53F2822914F8415BAAEAB9E4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFB55DE1849DA8000BF6C46 /* Spbot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spbot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFB55E11849DA8000BF6C46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7EFB55E31849DA8000BF6C46 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -69,7 +71,8 @@
 		7EFB561A1849DCB900BF6C46 /* FixPinCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixPinCircle.m; sourceTree = "<group>"; };
 		7EFB561C1849F6BA00BF6C46 /* LinesCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinesCanvas.h; sourceTree = "<group>"; };
 		7EFB561D1849F6BA00BF6C46 /* LinesCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinesCanvas.m; sourceTree = "<group>"; };
-		E6AAD5CD184C82BE009AC43C /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		C77043D5979042A0801D3C21 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		E61B182F184D918D00AE4EBA /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		E6AAD5CF184C82E8009AC43C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E6AAD5D1184C82F1009AC43C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E6AAD5D3184C82FA009AC43C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -90,11 +93,12 @@
 				E6AAD5D6184C8303009AC43C /* CoreImage.framework in Frameworks */,
 				E6AAD5D4184C82FA009AC43C /* CoreMedia.framework in Frameworks */,
 				E6AAD5D2184C82F1009AC43C /* CoreVideo.framework in Frameworks */,
+				E61B1830184D918D00AE4EBA /* opencv2.framework in Frameworks */,
 				E6AAD5D0184C82E8009AC43C /* QuartzCore.framework in Frameworks */,
 				7EFB55E41849DA8000BF6C46 /* CoreGraphics.framework in Frameworks */,
 				7EFB55E61849DA8000BF6C46 /* UIKit.framework in Frameworks */,
-				E6AAD5CE184C82BE009AC43C /* opencv2.framework in Frameworks */,
 				7EFB55E21849DA8000BF6C46 /* Foundation.framework in Frameworks */,
+				67AB1EB603A54EEEA29DDA9D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +122,7 @@
 				7EFB56091849DA8000BF6C46 /* SpbotTests */,
 				7EFB55E01849DA8000BF6C46 /* Frameworks */,
 				7EFB55DF1849DA8000BF6C46 /* Products */,
+				C77043D5979042A0801D3C21 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,6 +138,7 @@
 		7EFB55E01849DA8000BF6C46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E61B182F184D918D00AE4EBA /* opencv2.framework */,
 				E6AAD5DB184C831F009AC43C /* Accelerate.framework */,
 				E6AAD5D9184C8316009AC43C /* AssetsLibrary.framework */,
 				E6AAD5D7184C830B009AC43C /* AVFoundation.framework */,
@@ -140,11 +146,11 @@
 				E6AAD5D3184C82FA009AC43C /* CoreMedia.framework */,
 				E6AAD5D1184C82F1009AC43C /* CoreVideo.framework */,
 				E6AAD5CF184C82E8009AC43C /* QuartzCore.framework */,
-				E6AAD5CD184C82BE009AC43C /* opencv2.framework */,
 				7EFB55E11849DA8000BF6C46 /* Foundation.framework */,
 				7EFB55E31849DA8000BF6C46 /* CoreGraphics.framework */,
 				7EFB55E51849DA8000BF6C46 /* UIKit.framework */,
 				7EFB56031849DA8000BF6C46 /* XCTest.framework */,
+				53F2822914F8415BAAEAB9E4 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -204,9 +210,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EFB56131849DA8000BF6C46 /* Build configuration list for PBXNativeTarget "Spbot" */;
 			buildPhases = (
+				BC9234F8AB544A36B0F7BE92 /* Check Pods Manifest.lock */,
 				7EFB55DA1849DA8000BF6C46 /* Sources */,
 				7EFB55DB1849DA8000BF6C46 /* Frameworks */,
 				7EFB55DC1849DA8000BF6C46 /* Resources */,
+				6ED77028269B46419E903D40 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -289,6 +297,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6ED77028269B46419E903D40 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC9234F8AB544A36B0F7BE92 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7EFB55DA1849DA8000BF6C46 /* Sources */ = {
@@ -433,6 +474,7 @@
 		};
 		7EFB56141849DA8000BF6C46 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C77043D5979042A0801D3C21 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -440,6 +482,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/crane/Documents/Spbot,
+					/Users/crane/Documents/spbot/iOS/Spbot,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Spbot/Spbot-Prefix.pch";
@@ -453,6 +496,7 @@
 		};
 		7EFB56151849DA8000BF6C46 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C77043D5979042A0801D3C21 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -460,6 +504,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/crane/Documents/Spbot,
+					/Users/crane/Documents/spbot/iOS/Spbot,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Spbot/Spbot-Prefix.pch";

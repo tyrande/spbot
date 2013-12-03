@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "FixPinCircle.h"
 #import "LinesCanvas.h"
+#import "GCDAsyncUdpSocket.h"
+#import "GCDAsyncSocket.h"
 
 @interface ViewController ()
 @property (strong, nonatomic) LinesCanvas *canvas;
@@ -20,7 +22,9 @@
 @property (strong, nonatomic) UIImageView *imageView;
 @property (nonatomic, strong) CvVideoCamera* videoCamera;
 
-@property (nonatomic, strong) UIButton* startCaptrue;
+@property (nonatomic, strong) UIButton *startCaptrue;
+@property (strong, nonatomic) GCDAsyncUdpSocket *connSocket;
+@property (strong, nonatomic) NSArray *thirdpin;
 @end
 
 @implementation ViewController
@@ -69,7 +73,20 @@
     [_startCaptrue setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
     [self.view addSubview:_startCaptrue];
     
-    [self refreshCanvas];
+    _thirdpin = nil;
+    [self refreshCanvasX:-1 Y:-1];
+    
+    
+    NSError *error = nil;
+    _connSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    int port = 9527;
+    if (![_connSocket bindToPort:port error:&error]){
+        NSLog(@"Error starting server (bind): %@", error);return;
+    }
+    if (![_connSocket beginReceiving:&error]) {
+        [_connSocket close];
+        NSLog(@"Error starting server (recv): %@", error);return;
+    }
 }
 
 - (IBAction) imageMoved:(id) sender withEvent:(UIEvent *) event
@@ -78,12 +95,12 @@
     UIControl *control = sender;
     control.center = point;
     
-    [self refreshCanvas];
+    [self refreshCanvasX:-1 Y:-1];
 }
 
--(void)refreshCanvas
+-(void)refreshCanvasX:(CGFloat)x Y:(CGFloat)y
 {
-    [_canvas setPoint:CGPointMake(160, 300) point1:_pin1.center point2:_pin2.center];
+    [_canvas setPoint:CGPointMake(x, y) point1:_pin1.center point2:_pin2.center];
     [_circle1 setRadius:_fixRadius x:_pin1.center.x y:_pin1.center.y];
     [_circle2 setRadius:_fixRadius x:_pin2.center.x y:_pin2.center.y];
 }
@@ -112,14 +129,29 @@
     CGFloat y1 = [[[points firstObject] lastObject] floatValue];
     CGFloat x2 = [[[points lastObject] firstObject] floatValue];
     CGFloat y2 = [[[points lastObject] lastObject] floatValue];
+    CGFloat x3 = -10;
+    CGFloat y3 = -10;
     
-    NSLog(@"%f,%f --- %f,%f", x1, y1, x2, y2);
+//    NSLog(@"%f,%f --- %f,%f", x1, y1, x2, y2);
+    
+    if (_thirdpin) {
+        x3 = [[_thirdpin firstObject] floatValue];
+        y3 = [[_thirdpin lastObject] floatValue];
+    }
     
     CGFloat rate = 320.0/480.0;
     _pin1.center = CGPointMake(x1*rate, y1*rate);
     _pin2.center = CGPointMake(x2*rate, y2*rate);
+    [self refreshCanvasX:x3*rate Y:y3*rate];
     
-    [self refreshCanvas];
+    NSData *send;
+    if (_thirdpin) {
+        send = [[NSString stringWithFormat:@"(%.1f,%.1f,%.1f,%.1f,%.1f,%.1f)",x1,y1,x2,y2,x3,y3] dataUsingEncoding:NSUTF8StringEncoding];
+    }else{
+        send = [[NSString stringWithFormat:@"(%.1f,%.1f,%.1f,%.1f)",x1,y1,x2,y2] dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    [_connSocket sendData:send toHost:@"192.168.101.8" port:9595 withTimeout:-1 tag:0];
 }
 
 #ifdef __cplusplus
@@ -128,11 +160,14 @@
     Mat image_copy;
     cvtColor(image, image_copy, COLOR_BGRA2BGR);
     cvtColor(image_copy, image_copy, COLOR_BGR2HSV);
-    inRange(image_copy, Scalar(170,160,60), Scalar(180,256,256), image_copy);
+    medianBlur(image_copy, image_copy, 3);
+    
+    inRange(image_copy, Scalar(170,160,60), Scalar(180,256,256), image);
     
     vector<Vec3f> circles;
-    HoughCircles(image_copy, circles, CV_HOUGH_GRADIENT, 1, image.cols / 3,
-                 1,1, 1,10);
+    HoughCircles(image, circles, CV_HOUGH_GRADIENT, 1, image.cols / 3,
+                 1,1, 2,20);
+    NSLog(@"-- %ld", circles.size());
     if (circles.size() >= 2){
         NSMutableArray *points = [NSMutableArray arrayWithCapacity:circles.size()];
         for( size_t i = 0; i < circles.size(); i++ ){
@@ -144,7 +179,10 @@
             return [[a lastObject] compare:[b lastObject]];
         }];
         if (points.count > 2) {
+            _thirdpin = [points objectAtIndex:2];
             [points removeObjectsInRange:NSMakeRange(2, points.count - 2)];
+        }else{
+            _thirdpin = nil;
         }
         [points sortUsingComparator:^ NSComparisonResult(NSArray *a, NSArray *b){
             return [[a firstObject] compare:[b firstObject]];
