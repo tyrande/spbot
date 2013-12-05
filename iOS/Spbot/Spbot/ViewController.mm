@@ -12,6 +12,7 @@
 #import "GCDAsyncUdpSocket.h"
 #import "GCDAsyncSocket.h"
 #import "CvVideoPhotoCamera.h"
+#import "SVGView.h"
 
 using namespace cv;
 
@@ -30,6 +31,12 @@ using namespace cv;
 @property (nonatomic, strong) UILabel *fps;
 @property (nonatomic) int fps_num;
 @property (strong, nonatomic) MWPhoto *photo;
+
+@property (strong, nonatomic) SVGView *svg;
+@property (nonatomic) CGAffineTransform lastM;
+@property (nonatomic) CGFloat firstX;
+@property (nonatomic) CGFloat firstY;
+
 @end
 
 @implementation ViewController
@@ -85,6 +92,25 @@ using namespace cv;
     _fps.textAlignment = NSTextAlignmentRight;
     _fps.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_fps];
+    
+    _svg = [[SVGView alloc] initWithFrame:CGRectMake(100, 100, 120, 200)];
+    [_svg loadFromFile:@"light-bulb-4"];
+    [self.view addSubview:_svg];
+    
+    
+    UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scale:)];
+	[pinchRecognizer setDelegate:self];
+	[self.view addGestureRecognizer:pinchRecognizer];
+    
+	UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotate:)];
+	[rotationRecognizer setDelegate:self];
+	[self.view addGestureRecognizer:rotationRecognizer];
+    
+	UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
+	[panRecognizer setMinimumNumberOfTouches:1];
+	[panRecognizer setMaximumNumberOfTouches:1];
+	[panRecognizer setDelegate:self];
+	[self.view addGestureRecognizer:panRecognizer];
 }
 
 -(void)refreshCanvas
@@ -226,6 +252,43 @@ using namespace cv;
 //}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+}
+
+#pragma mark - trans svg
+
+-(void)scale:(id)sender {
+    
+    if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+        _lastM = _svg.transform;
+        return;
+    }
+    CGFloat t = [(UIPinchGestureRecognizer*)sender scale];
+    [_svg setTransform:CGAffineTransformScale(_lastM, t, t)];
+}
+
+-(void)rotate:(id)sender {
+    
+    if([(UIRotationGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+        _lastM = _svg.transform;
+        return;
+    }
+    CGFloat t = [(UIRotationGestureRecognizer*)sender rotation];
+    NSLog(@"%f", t);
+    [_svg setTransform:CGAffineTransformRotate(_lastM, t)];
+}
+
+
+-(void)move:(id)sender {
+    
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
+    
+    if([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+        _firstX = [_svg center].x;
+        _firstY = [_svg center].y;
+    }
+    
+    translatedPoint = CGPointMake(_firstX+translatedPoint.x, _firstY+translatedPoint.y);
+    [_svg setCenter:translatedPoint];
 }
 
 @end

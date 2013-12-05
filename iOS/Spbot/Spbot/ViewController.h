@@ -13,6 +13,6 @@
 #define _RATE_ (320.0f/288.0f)
 
 
-@interface ViewController : UIViewController <CvVideoCameraDelegate, CvPhotoCameraDelegate, MWPhotoBrowserDelegate>
+@interface ViewController : UIViewController <CvVideoCameraDelegate, CvPhotoCameraDelegate, MWPhotoBrowserDelegate, UIGestureRecognizerDelegate>
 
 @end

@@ -12,6 +12,8 @@
 @property (nonatomic) CGFloat width;
 @property (nonatomic) CGFloat height;
 
+@property (nonatomic) BOOL linesDebug;
+
 @property (strong, nonatomic) NSMutableArray *elements;
 
 -(void)loadFromFile:(NSString *)fileName;

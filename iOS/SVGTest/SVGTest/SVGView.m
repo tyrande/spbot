@@ -18,6 +18,7 @@
         self.backgroundColor = [UIColor clearColor];
         _width = 0;
         _height = 0;
+        _linesDebug = NO;
     }
     return self;
 }
@@ -83,8 +84,11 @@
     
     CGFloat ratio = self.frame.size.width / _width;
     for (SVGEleBase *ele in _elements) {
-//        [ele draw:contextRef ratio:ratio];
-        [ele drawWithLines:contextRef ratio:ratio minLen:100];
+        if (_linesDebug) {
+            [ele drawWithLines:contextRef ratio:ratio minLen:100];
+        }else{
+            [ele draw:contextRef ratio:ratio];
+        }
     }
     
     CGContextStrokePath(contextRef);

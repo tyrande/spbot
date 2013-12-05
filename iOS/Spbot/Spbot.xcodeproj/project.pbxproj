@@ -26,6 +26,17 @@
 		7EFB561B1849DCB900BF6C46 /* FixPinCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB561A1849DCB900BF6C46 /* FixPinCircle.m */; };
 		7EFB561E1849F6BA00BF6C46 /* LinesCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB561D1849F6BA00BF6C46 /* LinesCanvas.m */; };
 		E61B1830184D918D00AE4EBA /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E61B182F184D918D00AE4EBA /* opencv2.framework */; };
+		E63C568D18508A1E00DC345D /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C568C18508A1E00DC345D /* CGPointExtension.m */; };
+		E63C56A018508A6600DC345D /* SVGCubicCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C568F18508A6600DC345D /* SVGCubicCurve.m */; };
+		E63C56A118508A6600DC345D /* SVGEleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569118508A6600DC345D /* SVGEleBase.m */; };
+		E63C56A218508A6600DC345D /* SVGLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569318508A6600DC345D /* SVGLine.m */; };
+		E63C56A318508A6600DC345D /* SVGMetaPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569518508A6600DC345D /* SVGMetaPath.m */; };
+		E63C56A418508A6600DC345D /* SVGPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569718508A6600DC345D /* SVGPath.m */; };
+		E63C56A518508A6600DC345D /* SVGPathCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569918508A6600DC345D /* SVGPathCommand.m */; };
+		E63C56A618508A6600DC345D /* SVGPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569B18508A6600DC345D /* SVGPoint.m */; };
+		E63C56A718508A6600DC345D /* SVGQuadraticCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569D18508A6600DC345D /* SVGQuadraticCurve.m */; };
+		E63C56A818508A6600DC345D /* SVGView.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569F18508A6600DC345D /* SVGView.m */; };
+		E63C56AA18508A8100DC345D /* light-bulb-4.xml in Resources */ = {isa = PBXBuildFile; fileRef = E63C56A918508A8100DC345D /* light-bulb-4.xml */; };
 		E6AAD5D0184C82E8009AC43C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5CF184C82E8009AC43C /* QuartzCore.framework */; };
 		E6AAD5D2184C82F1009AC43C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5D1184C82F1009AC43C /* CoreVideo.framework */; };
 		E6AAD5D4184C82FA009AC43C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5D3184C82FA009AC43C /* CoreMedia.framework */; };
@@ -100,6 +111,27 @@
 		7EFB561D1849F6BA00BF6C46 /* LinesCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinesCanvas.m; sourceTree = "<group>"; };
 		C77043D5979042A0801D3C21 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E61B182F184D918D00AE4EBA /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		E63C568B18508A1E00DC345D /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGPointExtension.h; path = ../../SVGTest/SVGTest/CGPointExtension.h; sourceTree = "<group>"; };
+		E63C568C18508A1E00DC345D /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CGPointExtension.m; path = ../../SVGTest/SVGTest/CGPointExtension.m; sourceTree = "<group>"; };
+		E63C568E18508A6600DC345D /* SVGCubicCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGCubicCurve.h; path = ../../SVGTest/SVGTest/SVGCubicCurve.h; sourceTree = "<group>"; };
+		E63C568F18508A6600DC345D /* SVGCubicCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGCubicCurve.m; path = ../../SVGTest/SVGTest/SVGCubicCurve.m; sourceTree = "<group>"; };
+		E63C569018508A6600DC345D /* SVGEleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGEleBase.h; path = ../../SVGTest/SVGTest/SVGEleBase.h; sourceTree = "<group>"; };
+		E63C569118508A6600DC345D /* SVGEleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGEleBase.m; path = ../../SVGTest/SVGTest/SVGEleBase.m; sourceTree = "<group>"; };
+		E63C569218508A6600DC345D /* SVGLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGLine.h; path = ../../SVGTest/SVGTest/SVGLine.h; sourceTree = "<group>"; };
+		E63C569318508A6600DC345D /* SVGLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGLine.m; path = ../../SVGTest/SVGTest/SVGLine.m; sourceTree = "<group>"; };
+		E63C569418508A6600DC345D /* SVGMetaPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGMetaPath.h; path = ../../SVGTest/SVGTest/SVGMetaPath.h; sourceTree = "<group>"; };
+		E63C569518508A6600DC345D /* SVGMetaPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGMetaPath.m; path = ../../SVGTest/SVGTest/SVGMetaPath.m; sourceTree = "<group>"; };
+		E63C569618508A6600DC345D /* SVGPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGPath.h; path = ../../SVGTest/SVGTest/SVGPath.h; sourceTree = "<group>"; };
+		E63C569718508A6600DC345D /* SVGPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGPath.m; path = ../../SVGTest/SVGTest/SVGPath.m; sourceTree = "<group>"; };
+		E63C569818508A6600DC345D /* SVGPathCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGPathCommand.h; path = ../../SVGTest/SVGTest/SVGPathCommand.h; sourceTree = "<group>"; };
+		E63C569918508A6600DC345D /* SVGPathCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGPathCommand.m; path = ../../SVGTest/SVGTest/SVGPathCommand.m; sourceTree = "<group>"; };
+		E63C569A18508A6600DC345D /* SVGPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGPoint.h; path = ../../SVGTest/SVGTest/SVGPoint.h; sourceTree = "<group>"; };
+		E63C569B18508A6600DC345D /* SVGPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGPoint.m; path = ../../SVGTest/SVGTest/SVGPoint.m; sourceTree = "<group>"; };
+		E63C569C18508A6600DC345D /* SVGQuadraticCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGQuadraticCurve.h; path = ../../SVGTest/SVGTest/SVGQuadraticCurve.h; sourceTree = "<group>"; };
+		E63C569D18508A6600DC345D /* SVGQuadraticCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGQuadraticCurve.m; path = ../../SVGTest/SVGTest/SVGQuadraticCurve.m; sourceTree = "<group>"; };
+		E63C569E18508A6600DC345D /* SVGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGView.h; path = ../../SVGTest/SVGTest/SVGView.h; sourceTree = "<group>"; };
+		E63C569F18508A6600DC345D /* SVGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGView.m; path = ../../SVGTest/SVGTest/SVGView.m; sourceTree = "<group>"; };
+		E63C56A918508A8100DC345D /* light-bulb-4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "light-bulb-4.xml"; path = "../../SVGTest/SVGTest/light-bulb-4.xml"; sourceTree = "<group>"; };
 		E6AAD5CF184C82E8009AC43C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E6AAD5D1184C82F1009AC43C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E6AAD5D3184C82FA009AC43C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -253,6 +285,7 @@
 				E6EB1EE5185064E60027E47F /* CvVideoPhotoCamera.h */,
 				E6EB1EE6185064E60027E47F /* CvVideoPhotoCamera.mm */,
 				7EFB55FC1849DA8000BF6C46 /* Images.xcassets */,
+				E63C568A18508A0200DC345D /* SVG */,
 				E6EB1EED18506DBC0027E47F /* 3rdparty */,
 				7EFB55E81849DA8000BF6C46 /* Supporting Files */,
 			);
@@ -262,6 +295,7 @@
 		7EFB55E81849DA8000BF6C46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E63C56A918508A8100DC345D /* light-bulb-4.xml */,
 				7EFB55E91849DA8000BF6C46 /* Spbot-Info.plist */,
 				7EFB55EA1849DA8000BF6C46 /* InfoPlist.strings */,
 				7EFB55ED1849DA8000BF6C46 /* main.m */,
@@ -286,6 +320,33 @@
 				7EFB560C1849DA8000BF6C46 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E63C568A18508A0200DC345D /* SVG */ = {
+			isa = PBXGroup;
+			children = (
+				E63C569E18508A6600DC345D /* SVGView.h */,
+				E63C569F18508A6600DC345D /* SVGView.m */,
+				E63C568B18508A1E00DC345D /* CGPointExtension.h */,
+				E63C568C18508A1E00DC345D /* CGPointExtension.m */,
+				E63C568E18508A6600DC345D /* SVGCubicCurve.h */,
+				E63C568F18508A6600DC345D /* SVGCubicCurve.m */,
+				E63C569018508A6600DC345D /* SVGEleBase.h */,
+				E63C569118508A6600DC345D /* SVGEleBase.m */,
+				E63C569218508A6600DC345D /* SVGLine.h */,
+				E63C569318508A6600DC345D /* SVGLine.m */,
+				E63C569418508A6600DC345D /* SVGMetaPath.h */,
+				E63C569518508A6600DC345D /* SVGMetaPath.m */,
+				E63C569618508A6600DC345D /* SVGPath.h */,
+				E63C569718508A6600DC345D /* SVGPath.m */,
+				E63C569818508A6600DC345D /* SVGPathCommand.h */,
+				E63C569918508A6600DC345D /* SVGPathCommand.m */,
+				E63C569A18508A6600DC345D /* SVGPoint.h */,
+				E63C569B18508A6600DC345D /* SVGPoint.m */,
+				E63C569C18508A6600DC345D /* SVGQuadraticCurve.h */,
+				E63C569D18508A6600DC345D /* SVGQuadraticCurve.m */,
+			);
+			name = SVG;
 			sourceTree = "<group>";
 		};
 		E6EB1EED18506DBC0027E47F /* 3rdparty */ = {
@@ -478,6 +539,7 @@
 				7EFB55EC1849DA8000BF6C46 /* InfoPlist.strings in Resources */,
 				E6EB1F2D18506DBD0027E47F /* README.mdown in Resources */,
 				E6EB1F3D18506DBD0027E47F /* MWPhotoBrowser.bundle in Resources */,
+				E63C56AA18508A8100DC345D /* light-bulb-4.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,27 +597,37 @@
 				E6EB1F3618506DBD0027E47F /* SDWebImageManager.m in Sources */,
 				7EFB55FB1849DA8000BF6C46 /* ViewController.mm in Sources */,
 				E6EB1F2918506DBD0027E47F /* MWTapDetectingView.m in Sources */,
+				E63C56A718508A6600DC345D /* SVGQuadraticCurve.m in Sources */,
 				E6EB1F3018506DBD0027E47F /* NSData+GIF.m in Sources */,
 				E6EB1F3418506DBD0027E47F /* SDWebImageDownloader.m in Sources */,
 				7EFB561E1849F6BA00BF6C46 /* LinesCanvas.m in Sources */,
 				E6EB1F2718506DBD0027E47F /* MWPhotoBrowser.m in Sources */,
+				E63C56A318508A6600DC345D /* SVGMetaPath.m in Sources */,
+				E63C56A418508A6600DC345D /* SVGPath.m in Sources */,
 				E6EB1F2B18506DBD0027E47F /* DACircularProgressView.m in Sources */,
 				E6EB1F2818506DBD0027E47F /* MWTapDetectingImageView.m in Sources */,
 				E6EB1F2C18506DBD0027E47F /* MBProgressHUD.m in Sources */,
 				7EFB55F21849DA8000BF6C46 /* AppDelegate.m in Sources */,
 				7EFB561B1849DCB900BF6C46 /* FixPinCircle.m in Sources */,
+				E63C56A518508A6600DC345D /* SVGPathCommand.m in Sources */,
 				E6EB1F3918506DBD0027E47F /* UIImage+GIF.m in Sources */,
 				E6EB1F3818506DBD0027E47F /* UIButton+WebCache.m in Sources */,
+				E63C56A018508A6600DC345D /* SVGCubicCurve.m in Sources */,
 				E6EB1F2A18506DBD0027E47F /* MWZoomingScrollView.m in Sources */,
+				E63C568D18508A1E00DC345D /* CGPointExtension.m in Sources */,
 				E6EB1F3C18506DBD0027E47F /* UIImageView+WebCache.m in Sources */,
 				E6EB1F3718506DBD0027E47F /* SDWebImagePrefetcher.m in Sources */,
 				E6EB1F3318506DBD0027E47F /* SDWebImageDecoder.m in Sources */,
 				E6EB1F3118506DBD0027E47F /* SDImageCache.m in Sources */,
+				E63C56A618508A6600DC345D /* SVGPoint.m in Sources */,
 				E6EB1F3218506DBD0027E47F /* SDWebImageCompat.m in Sources */,
 				7EFB55EE1849DA8000BF6C46 /* main.m in Sources */,
+				E63C56A818508A6600DC345D /* SVGView.m in Sources */,
 				E6EB1EEA18506A6D0027E47F /* ReviewViewController.m in Sources */,
 				E6EB1F3518506DBD0027E47F /* SDWebImageDownloaderOperation.m in Sources */,
+				E63C56A218508A6600DC345D /* SVGLine.m in Sources */,
 				E6EB1F2618506DBD0027E47F /* MWPhoto.m in Sources */,
+				E63C56A118508A6600DC345D /* SVGEleBase.m in Sources */,
 				E6EB1F2518506DBD0027E47F /* MWCaptionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
