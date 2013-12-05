@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LinesCanvas : UIView
-- (void)setPoint:(CGPoint)p point1:(CGPoint)p1 point2:(CGPoint)p2;
+- (void)setPoints:(NSArray *)points;
 @end

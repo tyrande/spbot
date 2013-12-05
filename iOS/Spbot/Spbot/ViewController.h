@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <opencv2/highgui/cap_ios.h>
-using namespace cv;
+#import "MWPhotoBrowser.h"
 
-@interface ViewController : UIViewController <CvVideoCameraDelegate>
+#define _RATE_ (320.0f/288.0f)
+
+
+@interface ViewController : UIViewController <CvVideoCameraDelegate, CvPhotoCameraDelegate, MWPhotoBrowserDelegate>
 
 @end
