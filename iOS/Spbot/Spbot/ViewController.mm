@@ -32,11 +32,14 @@ using namespace cv;
 @property (nonatomic) int fps_num;
 @property (strong, nonatomic) MWPhoto *photo;
 
+@property (strong, nonatomic) UIView *svgWrap;
 @property (strong, nonatomic) SVGView *svg;
 @property (nonatomic) CGAffineTransform lastM;
 @property (nonatomic) CGFloat firstX;
 @property (nonatomic) CGFloat firstY;
 
+@property (nonatomic) CGFloat pinDis;
+@property (nonatomic) CGFloat pinAng;
 @end
 
 @implementation ViewController
@@ -44,7 +47,7 @@ using namespace cv;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    _fixRadius = 300;
+    _fixRadius = 350;
     self.view.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
     
     _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 391)];
@@ -57,15 +60,18 @@ using namespace cv;
     
     _circle1 = [[FixPinCircle alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     _circle2 = [[FixPinCircle alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    _circle2.rightPoint = YES;
     [self.view addSubview:_circle1];
     [self.view addSubview:_circle2];
     
     _pin1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    _pin1.frame = CGRectMake(50-10, 50-10, 20, 20);
+//    _pin1.frame = CGRectMake(50-10, 50-10, 20, 20);
+    _pin1.frame = CGRectMake(-1, -100, 20, 20);
     [_pin1 setImage:[self pin_img] forState:UIControlStateNormal];
     [self.view addSubview:_pin1];
     _pin2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    _pin2.frame = CGRectMake(270-10, 50-10, 20, 20);
+//    _pin2.frame = CGRectMake(270-10, 50-10, 20, 20);
+    _pin2.frame = CGRectMake(-1, -100, 20, 20);
     [_pin2 setImage:[self pin_img] forState:UIControlStateNormal];
     [self.view addSubview:_pin2];
     
@@ -93,31 +99,67 @@ using namespace cv;
     _fps.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_fps];
     
-    _svg = [[SVGView alloc] initWithFrame:CGRectMake(100, 100, 120, 200)];
-    [_svg loadFromFile:@"light-bulb-4"];
-    [self.view addSubview:_svg];
+    _svgWrap = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, 300)];
+//    _svgWrap.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.3];
+    [self.view addSubview:_svgWrap];
     
+    _svg = [[SVGView alloc] initWithFrame:CGRectMake(0, 0, 240, 300)];
+    [_svg loadFromFile:@"light-bulb-4"];
+    [_svgWrap addSubview:_svg];
+//    _svg.hidden = YES;
     
     UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scale:)];
 	[pinchRecognizer setDelegate:self];
-	[self.view addGestureRecognizer:pinchRecognizer];
+	[_svgWrap addGestureRecognizer:pinchRecognizer];
     
 	UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotate:)];
 	[rotationRecognizer setDelegate:self];
-	[self.view addGestureRecognizer:rotationRecognizer];
+	[_svgWrap addGestureRecognizer:rotationRecognizer];
     
 	UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
 	[panRecognizer setMinimumNumberOfTouches:1];
 	[panRecognizer setMaximumNumberOfTouches:1];
 	[panRecognizer setDelegate:self];
-	[self.view addGestureRecognizer:panRecognizer];
+	[_svgWrap addGestureRecognizer:panRecognizer];
+    
+    _pinDis = -1;
 }
 
 -(void)refreshCanvas
 {
-    [_canvas setPoints:_points];
-    [_circle1 setRadius:_fixRadius x:_pin1.center.x y:_pin1.center.y];
-    [_circle2 setRadius:_fixRadius x:_pin2.center.x y:_pin2.center.y];
+    if (_pin1.center.y > 0 && _pin1.center.y > 0 &&
+        _pin1.center.y < 100 && _pin1.center.y < 100 &&
+        _pin1.center.x < 160 && _pin2.center.x > 160) {
+        _pin1.hidden = NO;
+        _pin2.hidden = NO;
+        _circle1.hidden = NO;
+        _circle2.hidden = NO;
+        _svgWrap.hidden = NO;
+        
+        CGFloat pD = ccpDistance(_pin1.center, _pin2.center);
+        CGFloat pA = asinf((_pin1.center.y - _pin2.center.y) / pD);
+        
+        if (_pinDis < 0) {
+            _pinDis = pD;
+            _pinAng = pA;
+        }
+        
+        CGFloat rate = pD * cos(_pinAng) / 240.0;
+        CGAffineTransform t = CGAffineTransformMakeScale(rate, rate);
+        t = CGAffineTransformRotate(t, _pinAng - pA);
+        t = CGAffineTransformTranslate(t, _pin1.center.x, _pin1.center.y);
+        [_svgWrap setTransform:t];
+        
+        [_canvas setPoints:_points];
+        [_circle1 setRadius:_fixRadius x:_pin1.center.x y:_pin1.center.y];
+        [_circle2 setRadius:_fixRadius x:_pin2.center.x y:_pin2.center.y];
+    }else{
+        _pin1.hidden = YES;
+        _pin2.hidden = YES;
+        _circle1.hidden = YES;
+        _circle2.hidden = YES;
+        _svgWrap.hidden = YES;
+    }
 }
 
 -(void)onCapture
@@ -164,9 +206,14 @@ using namespace cv;
     CGFloat x2 = [[[points lastObject] firstObject] floatValue];
     CGFloat y2 = [[[points lastObject] lastObject] floatValue];
 //    NSLog(@"%f,%f --- %f,%f", x1, y1, x2, y2);
-
-    _pin1.center = CGPointMake(x1*_RATE_, y1*_RATE_);
-    _pin2.center = CGPointMake(x2*_RATE_, y2*_RATE_);
+    
+    if (y1 < 100 && y2 < 100 && x1 < 160 && x2 > 160) {
+        _pin1.center = CGPointMake(x1*_RATE_, y1*_RATE_);
+        _pin2.center = CGPointMake(x2*_RATE_, y2*_RATE_);
+    }else{
+        _pin1.center = CGPointMake(0, -100);
+        _pin2.center = CGPointMake(0, -100);
+    }
     [self refreshCanvas];
 }
 
@@ -257,7 +304,6 @@ using namespace cv;
 #pragma mark - trans svg
 
 -(void)scale:(id)sender {
-    
     if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
         _lastM = _svg.transform;
         return;
@@ -267,20 +313,18 @@ using namespace cv;
 }
 
 -(void)rotate:(id)sender {
-    
     if([(UIRotationGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
         _lastM = _svg.transform;
         return;
     }
     CGFloat t = [(UIRotationGestureRecognizer*)sender rotation];
-    NSLog(@"%f", t);
     [_svg setTransform:CGAffineTransformRotate(_lastM, t)];
 }
 
 
 -(void)move:(id)sender {
     
-    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:_svgWrap];
     
     if([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
         _firstX = [_svg center].x;

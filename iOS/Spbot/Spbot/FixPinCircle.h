@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface FixPinCircle : UIView
+@property (nonatomic) BOOL rightPoint;
+
 -(void)setRadius:(CGFloat)r x:(CGFloat)x y:(CGFloat)y;
 
 @end
