@@ -62,4 +62,13 @@
     }
 }
 
+-(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+{
+    if (_metaPaths && _metaPaths.count > 0) {
+        for (SVGMetaPath *m in _metaPaths) {
+            [m drawLines:contextRef transform:t minLen:minLen];
+        }
+    }
+}
+
 @end

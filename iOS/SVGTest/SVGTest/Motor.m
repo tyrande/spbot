@@ -36,7 +36,7 @@
     CGFloat rpmLevel = 0;
     CGFloat lowerRPM = 0;
     CGFloat upperRPM = 0;
-    int rpmShiftCount = [_rpmShift count];
+    NSUInteger rpmShiftCount = [_rpmShift count];
     for (int i=1; i < rpmShiftCount; i++) {
         upperRPM = [[_rpmShift objectAtIndex:i] floatValue];
         if (_rpm < upperRPM) {

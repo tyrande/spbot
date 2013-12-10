@@ -52,4 +52,10 @@
 {
     CGContextMoveToPoint(context, _point.x*ratio, _point.y*ratio);
 }
+
+-(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+{
+    CGPoint point = CGPointApplyAffineTransform(_point, t);
+    CGContextMoveToPoint(contextRef, point.x, point.y);
+}
 @end

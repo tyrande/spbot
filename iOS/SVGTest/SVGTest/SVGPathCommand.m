@@ -27,4 +27,13 @@
         CGContextAddLineToPoint(context, pointIter.x*ratio, pointIter.y*ratio);
     }
 }
+-(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+{
+    CGFloat steps = ceilf([self maxLen]/minLen);
+    CGPoint pointIter = CGPointZero;
+    for (int i = 1; i <= steps; i++) {
+        pointIter = CGPointApplyAffineTransform([self deCasteljauPoint:(i/steps)], t);
+        CGContextAddLineToPoint(contextRef, pointIter.x, pointIter.y);
+    }
+}
 @end

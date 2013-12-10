@@ -149,5 +149,10 @@
         [c drawWithLines:context ratio:ratio minLen:minLen];
     }
 }
-
+-(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+{
+    for (SVGPathCommand *c in _curves) {
+        [c drawLines:contextRef transform:t minLen:minLen];
+    }
+}
 @end

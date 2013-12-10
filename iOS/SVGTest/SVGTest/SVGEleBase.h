@@ -18,4 +18,5 @@
 
 -(void)draw:(CGContextRef)context ratio:(CGFloat)ratio;
 -(void)drawWithLines:(CGContextRef)context ratio:(CGFloat)ratio minLen:(CGFloat)minLen;
+-(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen;
 @end
