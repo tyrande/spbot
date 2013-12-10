@@ -15,4 +15,5 @@
 
 @interface ViewController : UIViewController <CvVideoCameraDelegate, CvPhotoCameraDelegate, MWPhotoBrowserDelegate, UIGestureRecognizerDelegate>
 
+
 @end

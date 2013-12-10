@@ -24,13 +24,24 @@
 
 -(void)setRadius:(CGFloat)r x:(CGFloat)x y:(CGFloat)y
 {
-    self.frame = CGRectMake(x - r, y - r, r * 2, r * 2);
+    self.frame = CGRectMake(x-r, y, r*2, r);
+    [self setNeedsDisplay];
 }
 
 -(void)drawRect:(CGRect)rect
 {
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
-    [[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.2] setFill];
-    CGContextFillEllipseInRect(contextRef, CGRectMake(0, 0, self.frame.size.width, self.frame.size.width));
+    [[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.2] setStroke];
+    
+    CGFloat r = self.frame.size.height;
+
+	CGContextSetLineWidth(contextRef, r);
+    if (_rightPoint) {
+        CGContextAddArc(contextRef, r, 0, r/2.0, M_PI/180.0*100, M_PI/180.0*160, 0);
+    }else{
+        CGContextAddArc(contextRef, r, 0, r/2.0, M_PI/180.0*20, M_PI/180.0*80, 0);
+    }
+    
+    CGContextStrokePath(contextRef);
 }
 @end

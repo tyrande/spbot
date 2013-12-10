@@ -36,6 +36,14 @@
     
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
 	CGContextSetLineWidth(contextRef, 1.0f);
+    
+    [[UIColor colorWithRed:1 green:0 blue:0 alpha:1] setStroke];
+    CGContextMoveToPoint(contextRef, 0, 100);
+    CGContextAddLineToPoint(contextRef, 320, 100);
+    CGContextMoveToPoint(contextRef, 160, 0);
+    CGContextAddLineToPoint(contextRef, 160, 100);
+    CGContextStrokePath(contextRef);
+    
     [[UIColor colorWithRed:0 green:1 blue:0 alpha:1] setStroke];
     for (NSArray *p in _points) {
         CGFloat x = [[p objectAtIndex:0] floatValue]*_RATE_;
