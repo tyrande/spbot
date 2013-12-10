@@ -17,4 +17,5 @@
 @property (strong, nonatomic) NSMutableArray *elements;
 
 -(void)loadFromFile:(NSString *)fileName;
+-(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen;
 @end

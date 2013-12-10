@@ -37,6 +37,7 @@
 		E63C56A718508A6600DC345D /* SVGQuadraticCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569D18508A6600DC345D /* SVGQuadraticCurve.m */; };
 		E63C56A818508A6600DC345D /* SVGView.m in Sources */ = {isa = PBXBuildFile; fileRef = E63C569F18508A6600DC345D /* SVGView.m */; };
 		E63C56AA18508A8100DC345D /* light-bulb-4.xml in Resources */ = {isa = PBXBuildFile; fileRef = E63C56A918508A8100DC345D /* light-bulb-4.xml */; };
+		E65A5AE51855ADDD00894F88 /* 1386715683.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E65A5AE41855ADDD00894F88 /* 1386715683.jpg */; };
 		E6AAD5D0184C82E8009AC43C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5CF184C82E8009AC43C /* QuartzCore.framework */; };
 		E6AAD5D2184C82F1009AC43C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5D1184C82F1009AC43C /* CoreVideo.framework */; };
 		E6AAD5D4184C82FA009AC43C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AAD5D3184C82FA009AC43C /* CoreMedia.framework */; };
@@ -132,6 +133,7 @@
 		E63C569E18508A6600DC345D /* SVGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVGView.h; path = ../../SVGTest/SVGTest/SVGView.h; sourceTree = "<group>"; };
 		E63C569F18508A6600DC345D /* SVGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVGView.m; path = ../../SVGTest/SVGTest/SVGView.m; sourceTree = "<group>"; };
 		E63C56A918508A8100DC345D /* light-bulb-4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "light-bulb-4.xml"; path = "../../SVGTest/SVGTest/light-bulb-4.xml"; sourceTree = "<group>"; };
+		E65A5AE41855ADDD00894F88 /* 1386715683.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1386715683.jpg; sourceTree = "<group>"; };
 		E6AAD5CF184C82E8009AC43C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E6AAD5D1184C82F1009AC43C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E6AAD5D3184C82FA009AC43C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -295,6 +297,7 @@
 		7EFB55E81849DA8000BF6C46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E65A5AE41855ADDD00894F88 /* 1386715683.jpg */,
 				E63C56A918508A8100DC345D /* light-bulb-4.xml */,
 				7EFB55E91849DA8000BF6C46 /* Spbot-Info.plist */,
 				7EFB55EA1849DA8000BF6C46 /* InfoPlist.strings */,
@@ -536,6 +539,7 @@
 				7EFB55FD1849DA8000BF6C46 /* Images.xcassets in Resources */,
 				E6EB1F2F18506DBD0027E47F /* README.md in Resources */,
 				7EFB55F51849DA8000BF6C46 /* Main_iPhone.storyboard in Resources */,
+				E65A5AE51855ADDD00894F88 /* 1386715683.jpg in Resources */,
 				7EFB55EC1849DA8000BF6C46 /* InfoPlist.strings in Resources */,
 				E6EB1F2D18506DBD0027E47F /* README.mdown in Resources */,
 				E6EB1F3D18506DBD0027E47F /* MWPhotoBrowser.bundle in Resources */,

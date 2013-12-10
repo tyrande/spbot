@@ -101,10 +101,14 @@ using namespace cv;
     
     _svgWrap = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, 300)];
 //    _svgWrap.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.3];
+    _svgWrap.layer.anchorPoint = CGPointMake(0, 0);
+    _svgWrap.center = CGPointMake(0, 0);
     [self.view addSubview:_svgWrap];
     
     _svg = [[SVGView alloc] initWithFrame:CGRectMake(0, 0, 240, 300)];
     [_svg loadFromFile:@"light-bulb-4"];
+    _svg.layer.anchorPoint = CGPointMake(0, 0);
+    _svg.center = CGPointMake(0, 0);
     [_svgWrap addSubview:_svg];
 //    _svg.hidden = YES;
     
@@ -123,6 +127,11 @@ using namespace cv;
 	[_svgWrap addGestureRecognizer:panRecognizer];
     
     _pinDis = -1;
+    
+    //////////
+//    Mat img = [self cvMatFromUIImage:[UIImage imageNamed:@"1386715683.jpg"]];
+//    [self _processImage:img];
+//    _imageView.image = [self UIImageFromCVMat:img];
 }
 
 -(void)refreshCanvas
@@ -218,19 +227,18 @@ using namespace cv;
 }
 
 #ifdef __cplusplus
-- (void)processImage:(Mat&)image;
+- (NSArray *)_processImage:(Mat&)image_org output:(Mat&)image
 {
-    Mat image_copy;
-    cvtColor(image, image_copy, COLOR_BGRA2BGR);
-    cvtColor(image_copy, image_copy, COLOR_BGR2HSV);
-//    medianBlur(image_copy, image_copy, 1);
+    cvtColor(image_org, image, COLOR_BGRA2BGR);
+    cvtColor(image, image, COLOR_BGR2HSV);
     
-    inRange(image_copy, Scalar(170,160,60), Scalar(180,256,256), image_copy);
+    inRange(image, Scalar(160,160,100), Scalar(180,255,255), image);
     
     vector<Vec3f> circles;
-    HoughCircles(image_copy, circles, CV_HOUGH_GRADIENT, 1, image.cols/3, 1, 1, 1, 6);
+    HoughCircles(image, circles, CV_HOUGH_GRADIENT, 1, image.cols/4, 1, 1, 1, 6);
     
-    NSLog(@"-- %ld", circles.size());
+    Canny(image, image_org, 1, 1);
+    
     if (circles.size() >= 2){
         NSMutableArray *points = [NSMutableArray arrayWithCapacity:circles.size()];
         for( size_t i = 0; i < circles.size(); i++ ){
@@ -249,17 +257,147 @@ using namespace cv;
             return [[a firstObject] compare:[b firstObject]];
         }];
         
-        [self performSelectorInBackground:@selector(updatePins:) withObject:points];
+        return points;
     }
+    return nil;
+}
+
+- (NSArray *)_processImage2:(Mat&)image_org output:(Mat&)image
+{
+//    cvtColor(image_org, image, COLOR_BGRA2BGR);
+    cvtColor(image, image, COLOR_BGR2HSV);
     
+    inRange(image, Scalar(100,60,60), Scalar(140,255,255), image);
+    
+    vector<Vec3f> circles;
+    HoughCircles(image, circles, CV_HOUGH_GRADIENT, 1, image.cols/4, 1, 1, 1, 15);
+    
+    if (circles.size() >= 2){
+        NSMutableArray *points = [NSMutableArray arrayWithCapacity:circles.size()];
+        for( size_t i = 0; i < circles.size(); i++ ){
+            Vec3f c = circles[i];
+            [points addObject:@[[NSNumber numberWithFloat:c[0]], [NSNumber numberWithFloat:c[2]], [NSNumber numberWithFloat:c[1]]]];
+        }
+        _points = [NSArray arrayWithArray:points];
+        
+        [points sortUsingComparator:^ NSComparisonResult(NSArray *a, NSArray *b){
+            return [[a lastObject] compare:[b lastObject]];
+        }];
+        if (points.count > 2) {
+            [points removeObjectsInRange:NSMakeRange(2, points.count - 2)];
+        }
+        [points sortUsingComparator:^ NSComparisonResult(NSArray *a, NSArray *b){
+            return [[a firstObject] compare:[b firstObject]];
+        }];
+        
+        return points;
+    }
+    return nil;
+}
+
+
+- (void)processImage:(Mat&)image;
+{
+    Mat image_copy;
+    NSArray *ret = [self _processImage:image output:image_copy];
+    if (ret) {
+        [self performSelectorInBackground:@selector(updatePins:) withObject:ret];
+    }
     _fps_num++;
 }
+
 #endif
+
+- (cv::Mat)cvMatFromUIImage:(UIImage *)image
+{
+    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
+    CGFloat cols = image.size.width;
+    CGFloat rows = image.size.height;
+    
+    cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
+    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
+                                                    cols,                       // Width of bitmap
+                                                    rows,                       // Height of bitmap
+                                                    8,                          // Bits per component
+                                                    cvMat.step[0],              // Bytes per row
+                                                    colorSpace,                 // Colorspace
+                                                    kCGImageAlphaNoneSkipLast |
+                                                    kCGBitmapByteOrderDefault); // Bitmap info flags
+    
+    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
+    CGContextRelease(contextRef);
+    return cvMat;
+}
+
+-(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
+{
+    NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
+    CGColorSpaceRef colorSpace;
+    
+    if (cvMat.elemSize() == 1) {
+        colorSpace = CGColorSpaceCreateDeviceGray();
+    } else {
+        colorSpace = CGColorSpaceCreateDeviceRGB();
+    }
+    
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+    
+    // Creating CGImage from cv::Mat
+    CGImageRef imageRef = CGImageCreate(cvMat.cols,                                 //width
+                                        cvMat.rows,                                 //height
+                                        8,                                          //bits per component
+                                        8 * cvMat.elemSize(),                       //bits per pixel
+                                        cvMat.step[0],                            //bytesPerRow
+                                        colorSpace,                                 //colorspace
+                                        kCGImageAlphaNone|kCGBitmapByteOrderDefault,// bitmap info
+                                        provider,                                   //CGDataProviderRef
+                                        NULL,                                       //decode
+                                        false,                                      //should interpolate
+                                        kCGRenderingIntentDefault                   //intent
+                                        );
+    
+    
+    // Getting UIImage from CGImage
+    UIImage *finalImage = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    CGDataProviderRelease(provider);
+    CGColorSpaceRelease(colorSpace);
+    
+    return finalImage;
+}
 
 - (void)photoCamera:(CvPhotoCamera*)photoCamera capturedImage:(UIImage *)image
 {
-    _photo = [MWPhoto photoWithImage:image];
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width, image.size.height));
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
+    Mat img = [self cvMatFromUIImage:image];
+    NSArray *ps = [self _processImage2:img output:img];
+    NSLog(@"%@",ps);
+    NSLog(@"%f,%f",image.size.width, image.size.height);
+
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width, image.size.height));
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(contextRef, 1.0f);
+    [[UIColor colorWithRed:0 green:1 blue:0 alpha:1] setStroke];
+    for (NSArray *p in _points) {
+        CGFloat x = [[p objectAtIndex:0] floatValue];
+        CGFloat y = [[p objectAtIndex:2] floatValue];
+        CGFloat r = [[p objectAtIndex:1] floatValue];
+        CGContextAddEllipseInRect(contextRef, CGRectMake(x-r, y-r, 2*r, 2*r));
+    }
+    CGContextStrokePath(contextRef);
+    
+    
+    UIImage *image2 = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    _photo = [MWPhoto photoWithImage:image2];
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.displayActionButton = YES;
     browser.displayNavArrows = NO;
@@ -321,18 +459,13 @@ using namespace cv;
     [_svg setTransform:CGAffineTransformRotate(_lastM, t)];
 }
 
-
 -(void)move:(id)sender {
-    
-    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:_svgWrap];
-    
     if([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
-        _firstX = [_svg center].x;
-        _firstY = [_svg center].y;
+        _lastM = _svg.transform;
+        return;
     }
-    
-    translatedPoint = CGPointMake(_firstX+translatedPoint.x, _firstY+translatedPoint.y);
-    [_svg setCenter:translatedPoint];
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:_svgWrap];
+    [_svg setTransform:CGAffineTransformTranslate(_lastM, translatedPoint.x, translatedPoint.y)];
 }
 
 @end

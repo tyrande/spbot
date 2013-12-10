@@ -94,4 +94,38 @@
     CGContextStrokePath(contextRef);
 }
 
+-(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+{
+    CGContextSetLineWidth(contextRef, 1.0f);
+    [[UIColor blackColor] setStroke];
+    
+    for (SVGEleBase *ele in _elements) {
+//        [ele drawWithLines:contextRef ratio:ratio minLen:100];
+    }
+    
+    CGPoint p1 = CGPointMake(0, 100);
+    CGPoint p2 = CGPointMake(512, 0);
+    p1 = CGPointApplyAffineTransform(p1, t);
+    p2 = CGPointApplyAffineTransform(p2, t);
+    NSLog(@"%f,%f %f,%f", p1.x, p1.y, p2.x, p2.y);
+    CGContextMoveToPoint(contextRef, p1.x, p1.y);
+    CGContextAddLineToPoint(contextRef, p2.x, p2.y);
+    
+    CGPoint pa = CGPointMake(0, 200);
+    CGPoint pb = CGPointMake(200, 200);
+    CGPoint pc = CGPointMake(200, 0);
+    CGPoint pd = CGPointMake(0, 0);
+    pa = CGPointApplyAffineTransform(pa, t);
+    pb = CGPointApplyAffineTransform(pb, t);
+    pc = CGPointApplyAffineTransform(pc, t);
+    pd = CGPointApplyAffineTransform(pd, t);
+    CGContextMoveToPoint(contextRef, pa.x, pa.y);
+    CGContextAddLineToPoint(contextRef, pb.x, pb.y);
+    CGContextAddLineToPoint(contextRef, pc.x, pc.y);
+    CGContextAddLineToPoint(contextRef, pd.x, pd.y);
+    CGContextAddLineToPoint(contextRef, pa.x, pa.y);
+    
+    CGContextStrokePath(contextRef);
+}
+
 @end
