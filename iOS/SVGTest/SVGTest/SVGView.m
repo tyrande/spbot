@@ -8,6 +8,7 @@
 
 #import "SVGView.h"
 #import "SVGEleBase.h"
+#import "Wall.h"
 
 @implementation SVGView
 
@@ -92,6 +93,9 @@
     }
     
     CGContextStrokePath(contextRef);
+    
+//    Wall *wall = [[Wall alloc] initWithPositionA:ccp(20, 40) PositionB:ccp(300, 50)];
+//    [wall draw:contextRef Width:self.frame.size.width Height:self.frame.size.height];
 }
 
 @end

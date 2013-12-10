@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8329A3411855B79C0060A1FB /* Motor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8329A3401855B79C0060A1FB /* Motor.m */; };
+		8329A3441855B8130060A1FB /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 8329A3431855B8130060A1FB /* Wall.m */; };
+		8329A3471855B81E0060A1FB /* Spray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8329A3461855B81E0060A1FB /* Spray.m */; };
 		8354472D184F2EFC000C8DD7 /* SVGPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8354472C184F2EFC000C8DD7 /* SVGPoint.m */; };
 		83544730184F37D4000C8DD7 /* SVGLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8354472F184F37D4000C8DD7 /* SVGLine.m */; };
 		83544733184F4749000C8DD7 /* SVGPathCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 83544732184F4749000C8DD7 /* SVGPathCommand.m */; };
@@ -45,6 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8329A33F1855B79C0060A1FB /* Motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Motor.h; sourceTree = "<group>"; };
+		8329A3401855B79C0060A1FB /* Motor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Motor.m; sourceTree = "<group>"; };
+		8329A3421855B8130060A1FB /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
+		8329A3431855B8130060A1FB /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
+		8329A3451855B81E0060A1FB /* Spray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spray.h; sourceTree = "<group>"; };
+		8329A3461855B81E0060A1FB /* Spray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spray.m; sourceTree = "<group>"; };
 		8354472B184F2EFC000C8DD7 /* SVGPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGPoint.h; sourceTree = "<group>"; };
 		8354472C184F2EFC000C8DD7 /* SVGPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGPoint.m; sourceTree = "<group>"; };
 		8354472E184F37D4000C8DD7 /* SVGLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGLine.h; sourceTree = "<group>"; };
@@ -111,6 +120,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8329A33E1855B6EE0060A1FB /* PinSys */ = {
+			isa = PBXGroup;
+			children = (
+				8329A33F1855B79C0060A1FB /* Motor.h */,
+				8329A3401855B79C0060A1FB /* Motor.m */,
+				8329A3421855B8130060A1FB /* Wall.h */,
+				8329A3431855B8130060A1FB /* Wall.m */,
+				8329A3451855B81E0060A1FB /* Spray.h */,
+				8329A3461855B81E0060A1FB /* Spray.m */,
+			);
+			name = PinSys;
+			sourceTree = "<group>";
+		};
 		E66C4A88184F094A00D6DFF2 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +166,7 @@
 		E66C4A9A184F094A00D6DFF2 /* SVGTest */ = {
 			isa = PBXGroup;
 			children = (
+				8329A33E1855B6EE0060A1FB /* PinSys */,
 				E66C4AA3184F094A00D6DFF2 /* AppDelegate.h */,
 				E66C4AA4184F094A00D6DFF2 /* AppDelegate.m */,
 				E66C4AA6184F094A00D6DFF2 /* Main.storyboard */,
@@ -312,14 +335,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E66C4AAB184F094A00D6DFF2 /* ViewController.m in Sources */,
+				8329A3471855B81E0060A1FB /* Spray.m in Sources */,
 				E66C4AD1184F1A7A00D6DFF2 /* SVGPath.m in Sources */,
 				E66C4AA5184F094A00D6DFF2 /* AppDelegate.m in Sources */,
 				E66C4AA1184F094A00D6DFF2 /* main.m in Sources */,
 				E66C4AD7184F1DC200D6DFF2 /* SVGMetaPath.m in Sources */,
+				8329A3441855B8130060A1FB /* Wall.m in Sources */,
 				83544739184F73AC000C8DD7 /* SVGCubicCurve.m in Sources */,
 				8354473C184F7DF9000C8DD7 /* SVGQuadraticCurve.m in Sources */,
 				E66C4AD4184F1A8E00D6DFF2 /* SVGEleBase.m in Sources */,
 				83544730184F37D4000C8DD7 /* SVGLine.m in Sources */,
+				8329A3411855B79C0060A1FB /* Motor.m in Sources */,
 				83544733184F4749000C8DD7 /* SVGPathCommand.m in Sources */,
 				E66C4ACE184F0A4700D6DFF2 /* SVGView.m in Sources */,
 				83544736184F538F000C8DD7 /* CGPointExtension.m in Sources */,
