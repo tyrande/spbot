@@ -11,9 +11,9 @@
 
 @implementation SVGPath
 
--(id)initWithAttrs:(NSDictionary *)attrs
+-(id)initWithAttrs:(NSDictionary *)attrs svg:(id)svg
 {
-    self = [super initWithAttrs:attrs];
+    self = [super initWithAttrs:attrs svg:svg];
     if (self) {
         [self parseLines];
     }
@@ -39,34 +39,34 @@
     _metaPaths = [NSMutableArray arrayWithCapacity:ls.count];
     for (NSString *l in ls) {
         if (l && l.length > 0) {
-            [_metaPaths addObject:[[SVGMetaPath alloc] initWithPoints:l]];
+            [_metaPaths addObject:[[SVGMetaPath alloc] initWithPoints:l svg:self.svg]];
         }
     }
 }
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio
+-(void)draw
 {
     if (_metaPaths && _metaPaths.count > 0) {
         for (SVGMetaPath *l in _metaPaths) {
-            [l draw:context ratio:ratio];
+            [l draw];
         }
     }
 }
 
--(void)drawWithLines:(CGContextRef)context ratio:(CGFloat)ratio minLen:(CGFloat)minLen
+-(void)drawWithLines
 {
     if (_metaPaths && _metaPaths.count > 0) {
         for (SVGMetaPath *m in _metaPaths) {
-            [m drawWithLines:context ratio:ratio minLen:minLen];
+            [m drawWithLines];
         }
     }
 }
 
--(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+-(void)drawLines
 {
     if (_metaPaths && _metaPaths.count > 0) {
         for (SVGMetaPath *m in _metaPaths) {
-            [m drawLines:contextRef transform:t minLen:minLen];
+            [m drawLines];
         }
     }
 }

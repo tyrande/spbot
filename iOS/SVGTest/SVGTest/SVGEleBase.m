@@ -11,30 +11,25 @@
 
 @implementation SVGEleBase
 
-+(SVGEleBase *)create:(NSString *)eleName attrs:(NSDictionary *)attrs{
++(SVGEleBase *)create:(NSString *)eleName attrs:(NSDictionary *)attrs svg:(SVGView *)svg{
     if ([eleName isEqualToString:@"path"]) {
-        return [[SVGPath alloc] initWithAttrs:attrs];
+        return [[SVGPath alloc] initWithAttrs:attrs svg:svg];
     }
     
     return nil;
 }
 
--(id)initWithAttrs:(NSDictionary *)attrs
+-(id)initWithAttrs:(NSDictionary *)attrs svg:svg
 {
-    self = [super init];
+    self = [self init];
     if (self) {
+        _svg = svg;
         _attrs = [NSDictionary dictionaryWithDictionary:attrs];
     }
     return self;
 }
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio
-{
-}
-
--(void)drawWithLines:(CGContextRef)context ratio:(CGFloat)ratio minLen:(CGFloat)minLen
-{
-}
-
--(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen {}
+-(void)draw {}
+-(void)drawWithLines {}
+-(void)drawLines{}
 @end

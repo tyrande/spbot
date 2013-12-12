@@ -10,9 +10,9 @@
 
 @implementation SVGCubicCurve
 
--(id)initWithStart:(CGPoint)start StartControl:(CGPoint)startControl EndControl:(CGPoint)endControl End:(CGPoint)end
+-(id)initWithSvg:(SVGView *)svg Start:(CGPoint)start StartControl:(CGPoint)startControl EndControl:(CGPoint)endControl End:(CGPoint)end
 {
-    self = [super init];
+    self = [super initWithSvg:svg];
     if (self) {
         _startPoint = start;
         _startControlPoint = startControl;
@@ -54,9 +54,15 @@
     return maxDist;
 }
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio
+-(void)draw
 {
-    CGContextAddCurveToPoint(context, _startControlPoint.x*ratio, _startControlPoint.y*ratio, _endControlPoint.x*ratio, _endControlPoint.y*ratio, _endPoint.x*ratio, _endPoint.y*ratio);
+    CGContextAddCurveToPoint(self.svg.context,
+                             _startControlPoint.x*self.svg.ratio,
+                             _startControlPoint.y*self.svg.ratio,
+                             _endControlPoint.x*self.svg.ratio,
+                             _endControlPoint.y*self.svg.ratio,
+                             _endPoint.x*self.svg.ratio,
+                             _endPoint.y*self.svg.ratio);
 }
 
 @end

@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SVGView.h"
 
 @interface SVGMetaPath : NSObject
+@property (strong, nonatomic) SVGView *svg;
 @property (strong, nonatomic) NSString *points;
 @property (strong, nonatomic) NSMutableArray *curves;
 
--(id)initWithPoints:(NSString *)points;
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio;
--(void)drawWithLines:(CGContextRef)context ratio:(CGFloat)ratio minLen:(CGFloat)minLen;
--(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen;
+-(id)initWithPoints:(NSString *)points svg:(SVGView *)svg;
+-(void)draw;
+-(void)drawWithLines;
+-(void)drawLines;
 @end

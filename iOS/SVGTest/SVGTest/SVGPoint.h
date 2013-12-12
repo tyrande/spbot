@@ -12,9 +12,9 @@
 @interface SVGPoint : SVGPathCommand
 @property (nonatomic) CGPoint point;
 
--(id)initWithX:(CGFloat)x Y:(CGFloat)y;
--(id)initWithCGPoint:(CGPoint)p;
--(id)initWithPoint:(SVGPoint *)p;
+-(id)initWithSvg:(SVGView *)svg X:(CGFloat)x Y:(CGFloat)y;
+-(id)initWithSvg:(SVGView *)svg CGPoint:(CGPoint)p;
+-(id)initWithSvg:(SVGView *)svg Point:(SVGPoint *)p;
 
 -(void)moveToPoint:(SVGPoint *)p;
 

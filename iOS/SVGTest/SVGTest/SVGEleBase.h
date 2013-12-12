@@ -8,15 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SVGView.h"
 
 @interface SVGEleBase : NSObject
 @property (strong, nonatomic) NSDictionary *attrs;
+@property (weak, nonatomic) SVGView *svg;
 
-+(SVGEleBase *)create:(NSString *)eleName attrs:(NSDictionary *)attrs;
++(SVGEleBase *)create:(NSString *)eleName attrs:(NSDictionary *)attrs svg:(SVGView *)svg;
 
--(id)initWithAttrs:(NSDictionary *)attrs;
+-(id)initWithAttrs:(NSDictionary *)attrs svg:svg;
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio;
--(void)drawWithLines:(CGContextRef)context ratio:(CGFloat)ratio minLen:(CGFloat)minLen;
--(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen;
+-(void)draw;
+-(void)drawWithLines;
+-(void)drawLines;
 @end

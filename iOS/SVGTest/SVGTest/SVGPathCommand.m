@@ -10,6 +10,15 @@
 
 @implementation SVGPathCommand
 
+-(id)initWithSvg:(SVGView *)svg
+{
+    self = [super init];
+    if (self) {
+        _svg = svg;
+    }
+    return self;
+}
+
 -(CGPoint)end{ return CGPointZero; }
 -(CGPoint)reflectionOfEndControl{ return CGPointZero; }
 
@@ -17,23 +26,23 @@
 
 -(CGPoint)deCasteljauPoint:(CGFloat)t { return [self end]; }
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio {}
--(void)drawWithLines:(CGContextRef)context ratio:(CGFloat)ratio minLen:(CGFloat)minLen
+-(void)draw{}
+-(void)drawWithLines
 {
-    CGFloat steps = ceilf([self maxLen]*ratio/minLen);
+    CGFloat steps = ceilf([self maxLen]*self.svg.ratio/self.svg.minLen);
     CGPoint pointIter = CGPointZero;
     for (int i = 1; i <= steps; i++) {
         pointIter = [self deCasteljauPoint:(i/steps)];
-        CGContextAddLineToPoint(context, pointIter.x*ratio, pointIter.y*ratio);
+        CGContextAddLineToPoint(self.svg.context, pointIter.x*self.svg.ratio, pointIter.y*self.svg.ratio);
     }
 }
--(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+-(void)drawLines
 {
-    CGFloat steps = ceilf([self maxLen]/minLen);
+    CGFloat steps = ceilf([self maxLen]/self.svg.minLen);
     CGPoint pointIter = CGPointZero;
     for (int i = 1; i <= steps; i++) {
-        pointIter = CGPointApplyAffineTransform([self deCasteljauPoint:(i/steps)], t);
-        CGContextAddLineToPoint(contextRef, pointIter.x, pointIter.y);
+        pointIter = CGPointApplyAffineTransform([self deCasteljauPoint:(i/steps)], self.svg.trans);
+        CGContextAddLineToPoint(self.svg.context, pointIter.x, pointIter.y);
     }
 }
 @end

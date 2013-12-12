@@ -10,9 +10,9 @@
 
 @implementation SVGLine
 
--(id)initWithStart:(CGPoint)start End:(CGPoint)end
+-(id)initWithSvg:(SVGView *)svg Start:(CGPoint)start End:(CGPoint)end
 {
-    self = [super init];
+    self = [super initWithSvg:svg];
     if (self) {
         _startPoint = start;
         _endPoint = end;
@@ -33,9 +33,9 @@
 
 -(CGFloat)maxLen { return [self len]; }
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio
+-(void)draw
 {
-    CGContextAddLineToPoint(context, _endPoint.x*ratio, _endPoint.y*ratio);
+    CGContextAddLineToPoint(self.svg.context, _endPoint.x*self.svg.ratio, _endPoint.y*self.svg.ratio);
 }
 
 @end

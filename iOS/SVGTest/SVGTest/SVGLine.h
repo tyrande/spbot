@@ -13,7 +13,7 @@
 @property (nonatomic) CGPoint startPoint;
 @property (nonatomic) CGPoint endPoint;
 
--(id)initWithStart:(CGPoint)start End:(CGPoint)end;
+-(id)initWithSvg:(SVGView *)svg Start:(CGPoint)start End:(CGPoint)end;
 
 -(CGFloat)len;
 @end

@@ -10,9 +10,9 @@
 
 @implementation SVGQuadraticCurve
 
--(id)initWithStart:(CGPoint)start Control:(CGPoint)control End:(CGPoint)end
+-(id)initWithSvg:svg Start:(CGPoint)start Control:(CGPoint)control End:(CGPoint)end
 {
-    self = [super init];
+    self = [super initWithSvg:svg];
     if (self) {
         _startPoint = start;
         _controlPoint = control;
@@ -48,8 +48,12 @@
     return maxDist;
 }
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio
+-(void)draw
 {
-    CGContextAddQuadCurveToPoint(context, _controlPoint.x*ratio, _controlPoint.y*ratio, _endPoint.x*ratio, _endPoint.y*ratio);
+    CGContextAddQuadCurveToPoint(self.svg.context,
+                                 _controlPoint.x*self.svg.ratio,
+                                 _controlPoint.y*self.svg.ratio,
+                                 _endPoint.x*self.svg.ratio,
+                                 _endPoint.y*self.svg.ratio);
 }
 @end

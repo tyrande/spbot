@@ -54,7 +54,7 @@
         NSLog(@"%@",eleName);
         NSLog(@"%@",attrs);
                              
-        SVGEleBase *eleObj = [SVGEleBase create:eleName attrs:attrs];
+        SVGEleBase *eleObj = [SVGEleBase create:eleName attrs:attrs svg:self];
         if (eleObj) {
             [_elements addObject:eleObj];
         }
@@ -79,58 +79,51 @@
     [super drawRect:rect];
     if (_width == 0) return;
     
-    CGContextRef contextRef = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(contextRef, 1.0f);
+    _context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(_context, self.frame.size.width/100.0f);
     [[UIColor blackColor] setStroke];
+    _minLen = 100;
     
-    CGFloat ratio = self.frame.size.width / _width;
+    _ratio = self.frame.size.width / _width;
     for (SVGEleBase *ele in _elements) {
         if (_linesDebug) {
-            [ele drawWithLines:contextRef ratio:ratio minLen:100];
+            [ele drawWithLines];
         }else{
-            [ele draw:contextRef ratio:ratio];
+            [ele draw];
         }
     }
     
-    CGContextStrokePath(contextRef);
+    CGContextStrokePath(_context);
     
 //    Wall *wall = [[Wall alloc] initWithPositionA:ccp(20, 40) PositionB:ccp(300, 50)];
 //    [wall draw:contextRef Width:self.frame.size.width Height:self.frame.size.height];
 }
 
--(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+-(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t mmPerPixel:(CGFloat)mmpp;
 {
-    CGContextSetLineWidth(contextRef, 1.0f);
+    CGContextSetLineWidth(contextRef, 22.0/mmpp);
     [[UIColor blackColor] setStroke];
     
-    for (SVGEleBase *ele in _elements) {
-//        [ele drawWithLines:contextRef ratio:ratio minLen:100];
-        [ele drawLines:contextRef transform:t minLen:100];
-    }
+    _trans = t;
+    _minLen = 100;
+    _context = contextRef;
     
-//    CGPoint p1 = CGPointMake(0, 100);
-//    CGPoint p2 = CGPointMake(512, 0);
-//    p1 = CGPointApplyAffineTransform(p1, t);
-//    p2 = CGPointApplyAffineTransform(p2, t);
-//    NSLog(@"%f,%f %f,%f", p1.x, p1.y, p2.x, p2.y);
-//    CGContextMoveToPoint(contextRef, p1.x, p1.y);
-//    CGContextAddLineToPoint(contextRef, p2.x, p2.y);
-//    
-//    CGPoint pa = CGPointMake(0, 200);
-//    CGPoint pb = CGPointMake(200, 200);
-//    CGPoint pc = CGPointMake(200, 0);
-//    CGPoint pd = CGPointMake(0, 0);
-//    pa = CGPointApplyAffineTransform(pa, t);
-//    pb = CGPointApplyAffineTransform(pb, t);
-//    pc = CGPointApplyAffineTransform(pc, t);
-//    pd = CGPointApplyAffineTransform(pd, t);
-//    CGContextMoveToPoint(contextRef, pa.x, pa.y);
-//    CGContextAddLineToPoint(contextRef, pb.x, pb.y);
-//    CGContextAddLineToPoint(contextRef, pc.x, pc.y);
-//    CGContextAddLineToPoint(contextRef, pd.x, pd.y);
-//    CGContextAddLineToPoint(contextRef, pa.x, pa.y);
+    for (SVGEleBase *ele in _elements) {
+        [ele drawLines];
+    }
     
     CGContextStrokePath(contextRef);
 }
 
+-(void)genData:(CGAffineTransform)t mmPerPixel:(CGFloat)mmpp p1:(CGPoint)p1 p2:(CGPoint)p2
+{
+    _trans = t;
+    _minLen = 100;
+    _mmPrePixel = mmpp;
+    _p1 = p1;
+    _p2 = p2;
+    
+    for (SVGEleBase *ele in _elements) {
+    }
+}
 @end

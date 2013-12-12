@@ -10,27 +10,27 @@
 
 @implementation SVGPoint
 
--(id)initWithX:(CGFloat)x Y:(CGFloat)y
+-(id)initWithSvg:(SVGView *)svg X:(CGFloat)x Y:(CGFloat)y
 {
-    self = [super init];
+    self = [super initWithSvg:svg];
     if (self) {
         _point = CGPointMake(x, y);
     }
     return self;
 }
 
--(id)initWithCGPoint:(CGPoint)p
+-(id)initWithSvg:(SVGView *)svg CGPoint:(CGPoint)p
 {
-    self = [super init];
+    self = [super initWithSvg:svg];
     if (self) {
         _point = p;
     }
     return self;
 }
 
--(id)initWithPoint:(SVGPoint *)p
+-(id)initWithSvg:(SVGView *)svg Point:(SVGPoint *)p
 {
-    self = [super init];
+    self = [super initWithSvg:svg];
     if (self) {
         _point = p.point;
     }
@@ -43,19 +43,19 @@
 
 -(CGPoint)reflectionOfEndControl { return _point; }
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio
+-(void)draw
 {
-    CGContextMoveToPoint(context, _point.x*ratio, _point.y*ratio);
+    CGContextMoveToPoint(self.svg.context, _point.x*self.svg.ratio, _point.y*self.svg.ratio);
 }
 
--(void)drawWithLines:(CGContextRef)context ratio:(CGFloat)ratio minLen:(CGFloat)minLen
+-(void)drawWithLines
 {
-    CGContextMoveToPoint(context, _point.x*ratio, _point.y*ratio);
+    CGContextMoveToPoint(self.svg.context, _point.x*self.svg.ratio, _point.y*self.svg.ratio);
 }
 
--(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+-(void)drawLines
 {
-    CGPoint point = CGPointApplyAffineTransform(_point, t);
-    CGContextMoveToPoint(contextRef, point.x, point.y);
+    CGPoint point = CGPointApplyAffineTransform(_point, self.svg.trans);
+    CGContextMoveToPoint(self.svg.context, point.x, point.y);
 }
 @end

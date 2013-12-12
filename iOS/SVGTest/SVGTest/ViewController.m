@@ -12,6 +12,7 @@
 @interface ViewController ()
 @property (strong, nonatomic) UISwitch *switchBtn;
 @property (strong, nonatomic) UISwitch *switchBtn2;
+@property (strong, nonatomic) UIButton *genData;
 @property (strong, nonatomic) SVGView *svg;
 
 @property (strong, nonatomic) UIView *svgwrap;
@@ -70,7 +71,7 @@
     
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(320.0f, 400.0f), FALSE, [[UIScreen mainScreen] scale]);
     CGContextRef context = UIGraphicsGetCurrentContext();
-    [_svg drawLines:context transform:tt minLen:10];
+    [_svg drawLines:context transform:tt mmPerPixel:4.0];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     _imgv.image = img;
@@ -78,16 +79,30 @@
     
     /////
     _switchBtn = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    _switchBtn.center = CGPointMake(100, 420);
+    _switchBtn.center = CGPointMake(60, 420);
     _switchBtn.on = NO;
     [_switchBtn addTarget:self action:@selector(onChangeSwitch) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_switchBtn];
     
     _switchBtn2 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    _switchBtn2.center = CGPointMake(220, 420);
+    _switchBtn2.center = CGPointMake(160, 420);
     _switchBtn2.on = NO;
     [_switchBtn2 addTarget:self action:@selector(onChangeSwitch2) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_switchBtn2];
+    
+    _genData = [[UIButton alloc] initWithFrame:CGRectMake(220, 400, 80, 40)];
+    [_genData setTitle:@"Generate" forState:UIControlStateNormal];
+    [_genData setTitleColor:[UIColor colorWithHue:203.0f/360.0f saturation:0.80f brightness:0.80f alpha:1.0f] forState:UIControlStateNormal];
+    _genData.backgroundColor = [UIColor clearColor];
+    [_genData addTarget:self action:@selector(onGenData) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_genData];
+}
+
+-(void)onGenData
+{
+    CGAffineTransform t = CGAffineTransformMakeScale(0.5, 0.5);
+    t = CGAffineTransformTranslate(t, 100, 100);
+    [_svg genData:t mmPerPixel:4.0f p1:ccp(0, 0) p2:ccp(320, 0)];
 }
 
 -(void)onChangeSwitch

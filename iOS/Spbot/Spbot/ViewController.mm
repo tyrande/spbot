@@ -35,9 +35,6 @@ using namespace cv;
 @property (strong, nonatomic) UIView *svgWrap;
 @property (strong, nonatomic) SVGView *svg;
 @property (nonatomic) CGAffineTransform lastM;
-@property (nonatomic) CGFloat firstX;
-@property (nonatomic) CGFloat firstY;
-
 @property (nonatomic) CGFloat pinDis;
 @property (nonatomic) CGFloat pinAng;
 @end

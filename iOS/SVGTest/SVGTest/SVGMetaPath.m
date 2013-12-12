@@ -20,10 +20,11 @@
 
 @implementation SVGMetaPath
 
--(id)initWithPoints:(NSString *)points
+-(id)initWithPoints:(NSString *)points svg:(SVGView *)svg
 {
     self = [super init];
     if (self) {
+        _svg = svg;
         _points = points;
         [self loadPoints];
     }
@@ -61,98 +62,113 @@
 {
     switch ([command characterAtIndex:0]) {
         case 'M':
-            [_curves addObject:[[SVGPoint alloc] initWithCGPoint:Ip(ps, 0, 1)]];
+            [_curves addObject:[[SVGPoint alloc] initWithSvg:self.svg
+                                                     CGPoint:Ip(ps, 0, 1)]];
             break;
         case 'L':
-            [_curves addObject:[[SVGLine alloc] initWithStart:LAST_END
-                                                          End:Ip(ps, 0, 1)]];
+            [_curves addObject:[[SVGLine alloc] initWithSvg:self.svg
+                                                      Start:LAST_END
+                                                        End:Ip(ps, 0, 1)]];
             break;
         case 'l':
-            [_curves addObject:[[SVGLine alloc] initWithStart:LAST_END
-                                                          End:ccpAdd(LAST_END, Ip(ps, 0, 1))]];
+            [_curves addObject:[[SVGLine alloc] initWithSvg:self.svg
+                                                      Start:LAST_END
+                                                        End:ccpAdd(LAST_END, Ip(ps, 0, 1))]];
             break;
         case 'H':
-            [_curves addObject:[[SVGLine alloc] initWithStart:LAST_END
-                                                          End:ccp(If(ps, 0), LAST_END.y)]];
+            [_curves addObject:[[SVGLine alloc] initWithSvg:self.svg
+                                                      Start:LAST_END
+                                                        End:ccp(If(ps, 0), LAST_END.y)]];
             break;
         case 'h':
-            [_curves addObject:[[SVGLine alloc] initWithStart:LAST_END
-                                                          End:ccp(LAST_END.x + If(ps, 0), LAST_END.y)]];
+            [_curves addObject:[[SVGLine alloc] initWithSvg:self.svg
+                                                      Start:LAST_END
+                                                        End:ccp(LAST_END.x + If(ps, 0), LAST_END.y)]];
             break;
         case 'V':
-            [_curves addObject:[[SVGLine alloc] initWithStart:LAST_END
-                                                          End:ccp(LAST_END.x, If(ps, 0))]];
+            [_curves addObject:[[SVGLine alloc] initWithSvg:self.svg
+                                                      Start:LAST_END
+                                                        End:ccp(LAST_END.x, If(ps, 0))]];
             break;
         case 'v':
-            [_curves addObject:[[SVGLine alloc] initWithStart:LAST_END
-                                                          End:ccp(LAST_END.x, LAST_END.y + If(ps, 0))]];
+            [_curves addObject:[[SVGLine alloc] initWithSvg:self.svg
+                                                      Start:LAST_END
+                                                        End:ccp(LAST_END.x, LAST_END.y + If(ps, 0))]];
             break;
         case 'C':
-            [_curves addObject:[[SVGCubicCurve alloc] initWithStart:LAST_END
-                                                       StartControl:Ip(ps, 0, 1)
-                                                         EndControl:Ip(ps, 2, 3)
-                                                                End:Ip(ps, 4, 5)]];
+            [_curves addObject:[[SVGCubicCurve alloc] initWithSvg:self.svg
+                                                            Start:LAST_END
+                                                     StartControl:Ip(ps, 0, 1)
+                                                       EndControl:Ip(ps, 2, 3)
+                                                              End:Ip(ps, 4, 5)]];
             break;
         case 'c':
-            [_curves addObject:[[SVGCubicCurve alloc] initWithStart:LAST_END
-                                                       StartControl:ccpAdd(LAST_END, Ip(ps, 0, 1))
-                                                         EndControl:ccpAdd(LAST_END, Ip(ps, 2, 3))
-                                                                End:ccpAdd(LAST_END, Ip(ps, 4, 5))]];
+            [_curves addObject:[[SVGCubicCurve alloc] initWithSvg:self.svg
+                                                            Start:LAST_END
+                                                     StartControl:ccpAdd(LAST_END, Ip(ps, 0, 1))
+                                                       EndControl:ccpAdd(LAST_END, Ip(ps, 2, 3))
+                                                              End:ccpAdd(LAST_END, Ip(ps, 4, 5))]];
             break;
         case 'S':
-            [_curves addObject:[[SVGCubicCurve alloc] initWithStart:LAST_END
-                                                       StartControl:LAST_REF
-                                                         EndControl:Ip(ps, 0, 1)
-                                                                End:Ip(ps, 2, 3)]];
+            [_curves addObject:[[SVGCubicCurve alloc] initWithSvg:self.svg
+                                                            Start:LAST_END
+                                                     StartControl:LAST_REF
+                                                       EndControl:Ip(ps, 0, 1)
+                                                              End:Ip(ps, 2, 3)]];
             break;
         case 's':
-            [_curves addObject:[[SVGCubicCurve alloc] initWithStart:LAST_END
-                                                       StartControl:LAST_REF
-                                                         EndControl:ccpAdd(LAST_END, Ip(ps, 0, 1))
-                                                                End:ccpAdd(LAST_END, Ip(ps, 2, 3))]];
+            [_curves addObject:[[SVGCubicCurve alloc] initWithSvg:self.svg
+                                                            Start:LAST_END
+                                                     StartControl:LAST_REF
+                                                       EndControl:ccpAdd(LAST_END, Ip(ps, 0, 1))
+                                                              End:ccpAdd(LAST_END, Ip(ps, 2, 3))]];
             break;
         case 'Q':
-            [_curves addObject:[[SVGQuadraticCurve alloc] initWithStart:LAST_END
-                                                                Control:Ip(ps, 0, 1)
-                                                                    End:Ip(ps, 2, 3)]];
+            [_curves addObject:[[SVGQuadraticCurve alloc] initWithSvg:self.svg
+                                                                Start:LAST_END
+                                                              Control:Ip(ps, 0, 1)
+                                                                  End:Ip(ps, 2, 3)]];
             break;
         case 'q':
-            [_curves addObject:[[SVGQuadraticCurve alloc] initWithStart:LAST_END
-                                                                Control:ccpAdd(LAST_END, Ip(ps, 0, 1))
-                                                                    End:ccpAdd(LAST_END, Ip(ps, 2, 3))]];
+            [_curves addObject:[[SVGQuadraticCurve alloc] initWithSvg:self.svg
+                                                                Start:LAST_END
+                                                              Control:ccpAdd(LAST_END, Ip(ps, 0, 1))
+                                                                  End:ccpAdd(LAST_END, Ip(ps, 2, 3))]];
             break;
         case 'T':
-            [_curves addObject:[[SVGQuadraticCurve alloc] initWithStart:LAST_END
-                                                                Control:LAST_REF
-                                                                    End:Ip(ps, 0, 1)]];
+            [_curves addObject:[[SVGQuadraticCurve alloc] initWithSvg:self.svg
+                                                                Start:LAST_END
+                                                              Control:LAST_REF
+                                                                  End:Ip(ps, 0, 1)]];
             break;
         case 't':
-            [_curves addObject:[[SVGQuadraticCurve alloc] initWithStart:LAST_END
-                                                                Control:LAST_REF
-                                                                    End:ccpAdd(LAST_END, Ip(ps, 0, 1))]];
+            [_curves addObject:[[SVGQuadraticCurve alloc] initWithSvg:self.svg
+                                                                Start:LAST_END
+                                                              Control:LAST_REF
+                                                                  End:ccpAdd(LAST_END, Ip(ps, 0, 1))]];
             break;
         default:
             break;
     }
 }
 
--(void)draw:(CGContextRef)context ratio:(CGFloat)ratio
+-(void)draw
 {
     for (SVGPathCommand *c in _curves) {
-        [c draw:context ratio:ratio];
+        [c draw];
     }
 }
 
--(void)drawWithLines:(CGContextRef)context ratio:(CGFloat)ratio minLen:(CGFloat)minLen
+-(void)drawWithLines
 {
     for (SVGPathCommand *c in _curves) {
-        [c drawWithLines:context ratio:ratio minLen:minLen];
+        [c drawWithLines];
     }
 }
--(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t minLen:(int)minLen
+-(void)drawLines
 {
     for (SVGPathCommand *c in _curves) {
-        [c drawLines:contextRef transform:t minLen:minLen];
+        [c drawLines];
     }
 }
 @end

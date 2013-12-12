@@ -218,22 +218,38 @@
 				E66C4ACD184F0A4700D6DFF2 /* SVGView.m */,
 				E66C4AD2184F1A8E00D6DFF2 /* SVGEleBase.h */,
 				E66C4AD3184F1A8E00D6DFF2 /* SVGEleBase.m */,
-				8354473A184F7DF9000C8DD7 /* SVGQuadraticCurve.h */,
-				8354473B184F7DF9000C8DD7 /* SVGQuadraticCurve.m */,
+				E6B5781B1859A7B700459348 /* SVGPath */,
+			);
+			name = SVG;
+			sourceTree = "<group>";
+		};
+		E6B5781B1859A7B700459348 /* SVGPath */ = {
+			isa = PBXGroup;
+			children = (
 				E66C4ACF184F1A7A00D6DFF2 /* SVGPath.h */,
 				E66C4AD0184F1A7A00D6DFF2 /* SVGPath.m */,
-				83544737184F73AC000C8DD7 /* SVGCubicCurve.h */,
-				83544738184F73AC000C8DD7 /* SVGCubicCurve.m */,
 				E66C4AD5184F1DC200D6DFF2 /* SVGMetaPath.h */,
 				E66C4AD6184F1DC200D6DFF2 /* SVGMetaPath.m */,
+				E6B5781C1859AA0000459348 /* SVGPathCommands */,
+			);
+			name = SVGPath;
+			sourceTree = "<group>";
+		};
+		E6B5781C1859AA0000459348 /* SVGPathCommands */ = {
+			isa = PBXGroup;
+			children = (
 				83544731184F4749000C8DD7 /* SVGPathCommand.h */,
 				83544732184F4749000C8DD7 /* SVGPathCommand.m */,
+				8354473A184F7DF9000C8DD7 /* SVGQuadraticCurve.h */,
+				8354473B184F7DF9000C8DD7 /* SVGQuadraticCurve.m */,
+				83544737184F73AC000C8DD7 /* SVGCubicCurve.h */,
+				83544738184F73AC000C8DD7 /* SVGCubicCurve.m */,
 				8354472B184F2EFC000C8DD7 /* SVGPoint.h */,
 				8354472C184F2EFC000C8DD7 /* SVGPoint.m */,
 				8354472E184F37D4000C8DD7 /* SVGLine.h */,
 				8354472F184F37D4000C8DD7 /* SVGLine.m */,
 			);
-			name = SVG;
+			name = SVGPathCommands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
