@@ -71,4 +71,12 @@
     }
 }
 
+-(void)addRopeLensToArray:(NSMutableArray *)ropeLens
+{
+    if (_metaPaths && _metaPaths.count > 0) {
+        for (SVGMetaPath *m in _metaPaths) {
+            [m addRopeLensToArray:ropeLens];
+        }
+    }
+}
 @end

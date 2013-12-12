@@ -115,8 +115,9 @@
     CGContextStrokePath(contextRef);
 }
 
--(void)genData:(CGAffineTransform)t mmPerPixel:(CGFloat)mmpp p1:(CGPoint)p1 p2:(CGPoint)p2
+-(id)genData:(CGAffineTransform)t mmPerPixel:(CGFloat)mmpp p1:(CGPoint)p1 p2:(CGPoint)p2
 {
+    NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
     _trans = t;
     _minLen = 100;
     _mmPrePixel = mmpp;
@@ -124,6 +125,14 @@
     _p2 = p2;
     
     for (SVGEleBase *ele in _elements) {
+        [ele addRopeLensToArray:data];
     }
+    
+    
+    NSLog(@"============++++++==============");
+    for (NSNumber *l in data) {
+        NSLog(@"%@", l);
+    }
+    return data;
 }
 @end

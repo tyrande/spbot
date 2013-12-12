@@ -18,4 +18,5 @@
 -(void)draw;
 -(void)drawWithLines;
 -(void)drawLines;
+-(void)addRopeLensToArray:(NSMutableArray *)ropeLens;
 @end

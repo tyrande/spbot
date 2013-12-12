@@ -58,4 +58,12 @@
     CGPoint point = CGPointApplyAffineTransform(_point, self.svg.trans);
     CGContextMoveToPoint(self.svg.context, point.x, point.y);
 }
+
+-(void)addRopeLensToArray:(NSMutableArray *)ropeLens
+{
+    CGPoint point = CGPointApplyAffineTransform(_point, self.svg.trans);
+    [ropeLens addObject:[NSNumber numberWithFloat:ccpDistance(point, self.svg.p1)*self.svg.mmPrePixel]];
+    [ropeLens addObject:[NSNumber numberWithFloat:ccpDistance(point, self.svg.p2)*self.svg.mmPrePixel]];
+    [ropeLens addObject:[NSNumber numberWithBool:YES]];
+}
 @end

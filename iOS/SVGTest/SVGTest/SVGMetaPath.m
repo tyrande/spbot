@@ -171,4 +171,12 @@
         [c drawLines];
     }
 }
+
+-(void)addRopeLensToArray:(NSMutableArray *)ropeLens
+{
+    for (SVGPathCommand *c in _curves) {
+        [c addRopeLensToArray:ropeLens];
+    }
+    [ropeLens replaceObjectAtIndex:([ropeLens count] - 1) withObject:[NSNumber numberWithBool:NO]];
+}
 @end

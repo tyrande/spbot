@@ -28,5 +28,5 @@
 
 -(void)loadFromFile:(NSString *)fileName;
 -(void)drawLines:(CGContextRef)contextRef transform:(CGAffineTransform)t mmPerPixel:(CGFloat)mmpp;
--(void)genData:(CGAffineTransform)t mmPerPixel:(CGFloat)mmpp p1:(CGPoint)p1 p2:(CGPoint)p2;
+-(id)genData:(CGAffineTransform)t mmPerPixel:(CGFloat)mmpp p1:(CGPoint)p1 p2:(CGPoint)p2;
 @end
