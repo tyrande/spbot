@@ -172,10 +172,10 @@
     }
 }
 
--(void)addRopeLensToArray:(NSMutableArray *)ropeLens
+-(void)addLinePointsToArray:(NSMutableArray *)ropeLens
 {
     for (SVGPathCommand *c in _curves) {
-        [c addRopeLensToArray:ropeLens];
+        [c addLinePointsToArray:ropeLens];
     }
     [ropeLens replaceObjectAtIndex:([ropeLens count] - 1) withObject:[NSNumber numberWithBool:NO]];
 }

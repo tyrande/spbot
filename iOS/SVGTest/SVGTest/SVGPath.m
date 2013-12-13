@@ -71,11 +71,11 @@
     }
 }
 
--(void)addRopeLensToArray:(NSMutableArray *)ropeLens
+-(void)addLinePointsToArray:(NSMutableArray *)ropeLens
 {
     if (_metaPaths && _metaPaths.count > 0) {
         for (SVGMetaPath *m in _metaPaths) {
-            [m addRopeLensToArray:ropeLens];
+            [m addLinePointsToArray:ropeLens];
         }
     }
 }

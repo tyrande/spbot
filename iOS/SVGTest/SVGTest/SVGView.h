@@ -10,13 +10,10 @@
 
 @interface SVGView : UIView
 
-@property (nonatomic) CGFloat ratio;
-@property (nonatomic) CGAffineTransform trans;
-@property (nonatomic) CGFloat minLen;
-@property (nonatomic) CGPoint p1;
-@property (nonatomic) CGPoint p2;
-@property (nonatomic) CGFloat mmPrePixel;
-@property (nonatomic) CGContextRef context;
+@property (nonatomic) CGFloat ratio; //预览变换比例
+@property (nonatomic) CGAffineTransform trans; //折线图输出变换矩阵
+@property (nonatomic) CGFloat minLen; //切折线最短距离，svg自身坐标
+@property (nonatomic) CGContextRef context; //画布
 
 
 @property (nonatomic) CGFloat width;

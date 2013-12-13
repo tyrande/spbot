@@ -45,14 +45,14 @@
         CGContextAddLineToPoint(self.svg.context, pointIter.x, pointIter.y);
     }
 }
--(void)addRopeLensToArray:(NSMutableArray *)ropeLens
+-(void)addLinePointsToArray:(NSMutableArray *)ropeLens
 {
     CGFloat steps = ceilf([self maxLen]/self.svg.minLen);
     CGPoint pointIter = CGPointZero;
     for (int i = 1; i <= steps; i++) {
         pointIter = CGPointApplyAffineTransform([self deCasteljauPoint:(i/steps)], self.svg.trans);
-        [ropeLens addObject:[NSNumber numberWithFloat:ccpDistance(pointIter, self.svg.p1)*self.svg.mmPrePixel]];
-        [ropeLens addObject:[NSNumber numberWithFloat:ccpDistance(pointIter, self.svg.p2)*self.svg.mmPrePixel]];
+        [ropeLens addObject:[NSNumber numberWithFloat:pointIter.x]];
+        [ropeLens addObject:[NSNumber numberWithFloat:pointIter.y]];
         [ropeLens addObject:[NSNumber numberWithBool:YES]];
     }
 }

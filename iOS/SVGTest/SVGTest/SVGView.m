@@ -33,7 +33,7 @@
     
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<(\\w+)[^>]+>" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSRegularExpression *regexAttr = [NSRegularExpression regularExpressionWithPattern:@" (\\w+)=['\"]([^'\"]*)['\"]" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *regexAttr = [NSRegularExpression regularExpressionWithPattern:@"\\.s(\\w+)=['\"]([^'\"]*)['\"]" options:NSRegularExpressionCaseInsensitive error:&error];
     
     [regex enumerateMatchesInString:xml
                             options:0
@@ -120,18 +120,20 @@
     NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
     _trans = t;
     _minLen = 100;
-    _mmPrePixel = mmpp;
-    _p1 = p1;
-    _p2 = p2;
     
     for (SVGEleBase *ele in _elements) {
-        [ele addRopeLensToArray:data];
+        [ele addLinePointsToArray:data];
     }
     
     
     NSLog(@"============++++++==============");
-    for (NSNumber *l in data) {
-        NSLog(@"%@", l);
+//    for (NSNumber *l in data) {
+//        NSLog(@"%@", l);
+//    }
+    
+    for (int i=0; i<data.count; i+=3) {
+        CGPoint p = ccp([data[i] floatValue], [data[i+1] floatValue]);
+        NSLog(@"%f, %f, %@", ccpDistance(p, p1)*mmpp, ccpDistance(p, p2)*mmpp, data[i+2]);
     }
     return data;
 }

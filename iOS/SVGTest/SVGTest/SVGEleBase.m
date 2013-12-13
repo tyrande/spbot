@@ -32,5 +32,5 @@
 -(void)draw {}
 -(void)drawWithLines {}
 -(void)drawLines {}
--(void)addRopeLensToArray:(NSMutableArray *)ropeLens {}
+-(void)addLinePointsToArray:(NSMutableArray *)ropeLens {}
 @end
