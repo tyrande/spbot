@@ -26,6 +26,7 @@ def setDelta(steps1, steps2):
     stepped2 = 0
     for i in range(int(slots)):
         n = i+1
+        print math.ceil(n*stepPerSlot1)
         if stepped1 < math.ceil(n*stepPerSlot1):
             stepped1 = math.ceil(n*stepPerSlot1)
             motor1(1)
@@ -47,3 +48,4 @@ if __name__ == '__main__':
         
     print '-'*20
     print sum(motor1_history), sum(motor2_history)
+
